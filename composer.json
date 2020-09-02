@@ -1,0 +1,20 @@
+{
+    "name": "hedeqiang\/green",
+    "description": "阿里云内容安全 PHP SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hedeqiang",
+            "email": "laravel_code@163.com"
+        }
+    ],
+    "require": {
+        "alibabacloud/sdk": "^1.8",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hedeqiang\\Green\\": "src"
+        }
+    }
+}
