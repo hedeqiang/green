@@ -215,16 +215,19 @@ class Green
 
     /**
      * 提交文件检测任务
-     * @param  string|array $url
-     * @param string[] $textScenes
-     * @param string[] $imageScenes
-     * @param null $callback
-     * @param null $seed
+     *
+     * @param string|array $url
+     * @param string[]     $textScenes
+     * @param string[]     $imageScenes
+     * @param null         $callback
+     * @param null         $seed
+     *
      * @return mixed
+     *
      * @throws ClientException
      * @throws ServerException
      */
-    public function fileAsyncScan($url, $textScenes = ['antispam'], $imageScenes=['porn','ad','terrorism','sface','qrcode','live','logo'] ,$callback=null,$seed=null)
+    public function fileAsyncScan($url, $textScenes = ['antispam'], $imageScenes = ['porn', 'ad', 'terrorism', 'sface', 'qrcode', 'live', 'logo'], $callback = null, $seed = null)
     {
         $tasks = $this->getTask($url, 'file');
         $body = [
@@ -232,23 +235,25 @@ class Green
             'callback' => $callback,
             'seed' => $seed,
             'textScenes' => $textScenes,
-            'imageScenes' => $imageScenes
-
+            'imageScenes' => $imageScenes,
         ];
 
-        return $this->response('fileAsyncScan',$body);
+        return $this->response('fileAsyncScan', $body);
     }
 
     /**
-     * 查询文件检测结果
+     * 查询文件检测结果.
+     *
      * @param array $taskId
+     *
      * @return mixed
+     *
      * @throws ClientException
      * @throws ServerException
      */
     public function fileAsyncScanResults($taskId = [])
     {
-        return $this->response('fileAsyncScanResults',$taskId);
+        return $this->response('fileAsyncScanResults', $taskId);
     }
 
     /**
