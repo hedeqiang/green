@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Hedeqiang\Green\Config;
+namespace Hedeqiang\Green;
 
 use ArrayAccess;
 

@@ -16,5 +16,12 @@
         "psr-4": {
             "Hedeqiang\\Green\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hedeqiang\\Green\\ServiceProvider"
+            ]
+        }
     }
 }
