@@ -101,7 +101,7 @@ class Green
             'note' => $note,
         ];
 
-        return $this->response('TextFeedback ', $body);
+        return $this->response('textFeedback ', $body);
     }
 
     /**
@@ -132,7 +132,7 @@ class Green
             $body['bizType'] = $bizType;
         }
 
-        return $this->response('ImageSyncScan', $body);
+        return $this->response('imageSyncScan', $body);
     }
 
     /**
@@ -168,7 +168,7 @@ class Green
             $body['bizType'] = $bizType;
         }
 
-        return $this->response('ImageAsyncScan', $body);
+        return $this->response('imageAsyncScan', $body);
     }
 
     /**
@@ -197,7 +197,7 @@ class Green
             'label' => $label,
         ];
 
-        return $this->response('ImageScanFeedback', $body);
+        return $this->response('imageScanFeedback', $body);
     }
 
     /**
@@ -210,7 +210,7 @@ class Green
      */
     public function imageAsyncScanResults(array $taskIds = [])
     {
-        return $this->response('ImageAsyncScanResults', $taskIds);
+        return $this->response('imageAsyncScanResults', $taskIds);
     }
 
     /**
