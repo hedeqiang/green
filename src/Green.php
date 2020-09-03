@@ -43,7 +43,7 @@ class Green
 
     /**
      * 文本垃圾内容检测
-     * @param array string $content 待检测文本，最长10000个中文字符（含标点）。
+     * @param array | string $content 待检测文本，最长10000个中文字符（含标点）。
      * @param null $bizType 该字段用于标识业务场景
      * @return \AlibabaCloud\Client\Result\Result|array
      * @throws ClientException
