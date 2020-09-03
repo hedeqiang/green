@@ -257,42 +257,41 @@ class Green
     }
 
     /**
-     * 短语音同步检测
-     * @param  string|array $url
-     * @param string[] $scenes
-     * @param null $bizType
+     * 短语音同步检测.
+     *
+     * @param string|array $url
+     * @param string[]     $scenes
+     * @param null         $bizType
+     *
      * @return mixed
+     *
      * @throws ClientException
      * @throws ServerException
      */
-    public function voiceSyncScan($url,$scenes = ['antispam'],$bizType = null)
+    public function voiceSyncScan($url, $scenes = ['antispam'], $bizType = null)
     {
         $tasks = $this->getTask($url, 'file');
         $body = [
             'tasks' => $tasks,
             'scenes' => $scenes,
         ];
-        if (!empty($bizType))
-        {
+        if (!empty($bizType)) {
             $body['bizType'] = $bizType;
         }
 
-        return $this->response('voiceSyncScan',$body);
+        return $this->response('voiceSyncScan', $body);
     }
 
     public function voiceAsyncScan()
     {
-
     }
 
     public function voiceAsyncScanResults()
     {
-
     }
 
     public function voiceCancelScan()
     {
-
     }
 
     /**
@@ -345,8 +344,6 @@ class Green
     }
 
     /**
-     * @param string $action
-     * @param array $body
      * @return mixed
      *
      * @throws ClientException
