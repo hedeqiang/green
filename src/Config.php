@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the hedeqiang/green.
+ *
+ * (c) hedeqaing<laravel_code@163.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace Hedeqiang\Green;
 
@@ -17,8 +25,6 @@ class Config implements ArrayAccess
 
     /**
      * Config constructor.
-     *
-     * @param array $config
      */
     public function __construct(array $config = [])
     {
