@@ -214,6 +214,44 @@ class Green
     }
 
     /**
+     * 提交文件检测任务
+     * @param  string|array $url
+     * @param string[] $textScenes
+     * @param string[] $imageScenes
+     * @param null $callback
+     * @param null $seed
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function fileAsyncScan($url, $textScenes = ['antispam'], $imageScenes=['porn','ad','terrorism','sface','qrcode','live','logo'] ,$callback=null,$seed=null)
+    {
+        $tasks = $this->getTask($url, 'file');
+        $body = [
+            'tasks' => $tasks,
+            'callback' => $callback,
+            'seed' => $seed,
+            'textScenes' => $textScenes,
+            'imageScenes' => $imageScenes
+
+        ];
+
+        return $this->response('fileAsyncScan',$body);
+    }
+
+    /**
+     * 查询文件检测结果
+     * @param array $taskId
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function fileAsyncScanResults($taskId = [])
+    {
+        return $this->response('fileAsyncScanResults',$taskId);
+    }
+
+    /**
      * @param $data
      * @param string $type
      *
