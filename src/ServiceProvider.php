@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the hedeqiang/green.
+ *
+ * (c) hedeqaing<laravel_code@163.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Hedeqiang\Green;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -9,13 +18,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/Config/green.php' => config_path('green.php'),
+            __DIR__.'/Config/green.php' => config_path('green.php'),
         ]);
     }
 
     public function register()
     {
-        $this->app->singleton(Green::class, function(){
+        $this->app->singleton(Green::class, function () {
             return new Green(config('green'));
         });
 
