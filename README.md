@@ -2,6 +2,7 @@
 
 <p align="center"> 阿里云内容安全 PHP SDK.</p>
 
+> 请先阅读 [阿里云内容安全文档](https://help.aliyun.com/document_detail/63004.html?spm=a2c4g.11186623.6.606.4a9160d1jDj9ak)
 
 ## Installing
 
