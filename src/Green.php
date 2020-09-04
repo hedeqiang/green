@@ -203,12 +203,13 @@ class Green
     /**
      * 图片异步检测结果.
      *
+     * @param array $taskIds 要查询的taskId列表。最大长度不超过1,000。
      * @return mixed
      *
      * @throws ClientException
      * @throws ServerException
      */
-    public function imageAsyncScanResults(array $taskIds = [])
+    public function imageAsyncScanResults(array $taskIds)
     {
         return $this->response('imageAsyncScanResults', $taskIds);
     }
@@ -217,17 +218,18 @@ class Green
      * 提交文件检测任务
      *
      * @param string|array $url
-     * @param string[]     $textScenes
-     * @param string[]     $imageScenes
-     * @param null         $callback
-     * @param null         $seed
+     * @param string[] $textScenes 检测内容包含文本时，指定检测场景，取值：antispam。
+     * @param string[] $imageScenes 检测内容包含图片时，指定检测场景
+     * @param null $bizType
+     * @param null $callback 异步检测结果回调通知您的URL，支持HTTP/HTTPS。
+     * @param null $seed 该值用于回调通知请求中的签名
      *
      * @return mixed
      *
      * @throws ClientException
      * @throws ServerException
      */
-    public function fileAsyncScan($url, $textScenes = ['antispam'], $imageScenes = ['porn', 'ad', 'terrorism', 'sface', 'qrcode', 'live', 'logo'], $callback = null, $seed = null)
+    public function fileAsyncScan($url, $textScenes = ['antispam'], $imageScenes = ['porn', 'ad', 'terrorism', 'sface', 'qrcode', 'live', 'logo'],$bizType = null, $callback = null, $seed = null)
     {
         $tasks = $this->getTask($url, 'file');
         $body = [
@@ -237,6 +239,9 @@ class Green
             'textScenes' => $textScenes,
             'imageScenes' => $imageScenes,
         ];
+        if (!empty($bizType)) {
+            $body['bizType'] = $bizType;
+        }
 
         return $this->response('fileAsyncScan', $body);
     }
@@ -244,23 +249,23 @@ class Green
     /**
      * 查询文件检测结果.
      *
-     * @param array $taskId
+     * @param array $taskId 	要查询的taskId列表。最大长度不超过10个。
      *
      * @return mixed
      *
      * @throws ClientException
      * @throws ServerException
      */
-    public function fileAsyncScanResults($taskId = [])
+    public function fileAsyncScanResults(array $taskId)
     {
         return $this->response('fileAsyncScanResults', $taskId);
     }
 
     /**
      * 短语音同步检测
-     * @param  string|array $url
-     * @param string[] $scenes
-     * @param null $bizType
+     * @param  string|array $url 需要检测的语音文件的下载地址，需要HTTP（S）协议可访问的公网链接。
+     * @param string[] $scenes 指定检测场景，取值：antispam。
+     * @param null $bizType 该字段用于标识业务场景
      * @return mixed
      * @throws ClientException
      * @throws ServerException
@@ -280,19 +285,59 @@ class Green
         return $this->response('voiceSyncScan',$body);
     }
 
-    public function voiceAsyncScan()
+    /**
+     * 语音异步检测
+     * @param $url
+     * @param string[] $scenes 指定检测场景，取值：antispam。
+     * @param null $bizType 	该字段用于标识业务场景
+     * @param null $callback 异步检测结果回调通知您的URL。支持HTTP和HTTPS。
+     * @param null $seed 随机字符串，该值用于回调通知请求中的签名。
+     * @param false $live 是否为直播流。默认为false，表示为普通语音文件检测；若需要检测语音流，该值必须传入true。
+     * @param false $offline 是否近线检测模式。
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function voiceAsyncScan($url, $scenes = ['antispam'],$bizType = null,$callback= null,$seed = null,$live= false, $offline = false)
     {
+        $tasks = $this->getTask($url,'file');
+        $body = array(
+            'tasks' => $tasks,
+            'scenes' => $scenes,
+            'live'   => $live,
+            'offline' => $offline,
+            'seed'   => $seed,
+            'callback' => $callback,
+        );
+        if (!empty($bizType))
+        {
+            $body['bizType'] = $bizType;
+        }
 
+        return $this->response('voiceAsyncScan', $body);
     }
 
-    public function voiceAsyncScanResults()
+    /**
+     * @param array $taskId 要查询的taskId列表，最大长度不超过100。
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function voiceAsyncScanResults(array $taskId)
     {
-
+        return $this->response('voiceAsyncScanResults', $taskId);
     }
 
-    public function voiceCancelScan()
+    /**
+     * 取消语音检测任务
+     * @param array $taskId 要取消的taskId列表，最多支持取消100个任务。
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function voiceCancelScan(array $taskId)
     {
-
+        return $this->response('voiceCancelScan', $taskId);
     }
 
     /**
