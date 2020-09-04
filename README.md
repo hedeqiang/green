@@ -56,6 +56,8 @@ $green->imageAsyncScanResults($taskIds);
 $green->imageScanFeedback($taskId);
 ```
 
+### More...
+
 ## 在 Laravel 中使用
 #### 发布配置文件
 ```php
