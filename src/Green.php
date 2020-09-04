@@ -80,28 +80,27 @@ class Green
     /**
      * 文本检测内容反馈.
      *
-     * @param string|null $taskId  云盾内容安全服务器返回的，唯一标识该检测任务的ID
-     * @param string|null $dataId  对应的请求中的dataId
+     * @param string|null $taskId 云盾内容安全服务器返回的，唯一标识该检测任务的ID
      * @param string|null $content 被检测的内容，最长10,000个字符
-     * @param string|null $label   反馈的分类，与具体的scene对应。取值范围参考文本反垃圾scene 和 label说明。
-     * @param string|null $note    备注，比如文本中的关键文字
+     * @param string|null $label 反馈的分类，与具体的scene对应。取值范围参考文本反垃圾scene 和 label说明。
+     * @param string|null $note 备注，比如文本中的关键文字
      *
      * @return mixed
      *
      * @throws ClientException
      * @throws ServerException
      */
-    public function textFeedback(string $taskId = null, string $dataId = null, string $content = null, string $label = null, string $note = null)
+    public function textFeedback(string $taskId = null, string $content = null, string $label = null, string $note = null)
     {
         $body = [
             'taskId' => $taskId,
-            'dataId' => $dataId,
+            'dataId' => uniqid(),
             'content' => $content,
             'label' => $label,
             'note' => $note,
         ];
 
-        return $this->response('textFeedback ', $body);
+        return $this->response('textFeedback', $body);
     }
 
     /**
@@ -350,6 +349,7 @@ class Green
         return $this->response('voiceCancelScan', $taskId);
     }
 
+
     /**
      * @param $data
      * @param string $type
@@ -390,7 +390,7 @@ class Green
             if (is_null($res)) {
                 $urls[] = $data;
             } else {
-                $urls = $res;
+                $urls[] = $res;
             }
         } else {
             $urls = $data;
