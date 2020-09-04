@@ -349,6 +349,40 @@ class Green
         return $this->response('voiceCancelScan', $taskId);
     }
 
+    /**
+     * @param array $tasks
+     * @param string[] $scenes
+     * @param null $bizType
+     */
+    public function videoSyncScan(array $tasks,$scenes = ['porn','terrorism','ad','live','logo','sface'],$bizType = null)
+    {
+//        $tasks = [
+//            [
+//                'frames' => ['url' => '33','offset' => '2'],
+//                'framePrefix' => '0'
+//            ],
+//            [
+//                'frames' => ['url' => '11','offset' => '33'],
+//                'framePrefix' => '0'
+//            ],
+//        ];
+        $data = [];
+        foreach ($tasks as $k => $v) {
+            $data[] = [
+                'dataId' => uniqid(),
+                'frames' => $v['frames'],
+                'framePrefix' => $v['framePrefix']
+            ];
+        }
+        $body = [
+            'tasks' => $data,
+            'scenes' => $scenes,
+        ];
+        if (!empty($bizType)) {
+            $body['bizType'] = $bizType;
+        }
+        return $this->response('videoSyncScan',$body);
+    }
 
     /**
      * @param $data
