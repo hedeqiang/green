@@ -63,8 +63,8 @@ php artisan vendor:publish --tag="Hedeqiang\Green\ServiceProvider"
 ```
 ##### 编写 .env 文件
 ```
-GREEN_ACCESS_KEY_ID=LTAI4GAWEXtHabyq5ukiEuoS
-GREEN_ACCESS_KEY_SECRET=vRwpOuVDrgvY2UzTdvj1TefZ16gR0C
+GREEN_ACCESS_KEY_ID=
+GREEN_ACCESS_KEY_SECRET=
 GREEN_REGION_ID=cn-beijing
 GREEN_CONNECT_TIMEOUT=6
 GREEN_DEBUG=false
