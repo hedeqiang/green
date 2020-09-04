@@ -353,27 +353,22 @@ class Green
      * @param array $tasks
      * @param string[] $scenes
      * @param null $bizType
+     * @param null $framePrefix
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
      */
     public function videoSyncScan(array $tasks,$scenes = ['porn','terrorism','ad','live','logo','sface'],$bizType = null)
     {
 //        $tasks = [
-//            [
-//                'frames' => ['url' => '33','offset' => '2'],
-//                'framePrefix' => '0'
-//            ],
-//            [
-//                'frames' => ['url' => '11','offset' => '33'],
-//                'framePrefix' => '0'
-//            ],
+//            [ 'url' => 'https://www.w3schools.com/html/movie.mp4','offset' => '5','framePrefix' => '0'],
+//            [ 'url' => 'https://www.w3schools.com/html/movie.mp4','offset' => '10','framePrefix' => '0'],
+//            [ 'url' => 'https://www.w3schools.com/html/movie.mp4','offset' => '15','framePrefix' => '0'],
 //        ];
-        $data = [];
-        foreach ($tasks as $k => $v) {
-            $data[] = [
-                'dataId' => uniqid(),
-                'frames' => $v['frames'],
-                'framePrefix' => $v['framePrefix']
-            ];
-        }
+
+        $data['dataId'] = uniqid();
+        $data['frames'] = $tasks;
+
         $body = [
             'tasks' => $data,
             'scenes' => $scenes,
@@ -381,7 +376,85 @@ class Green
         if (!empty($bizType)) {
             $body['bizType'] = $bizType;
         }
+//        return $body;
+
         return $this->response('videoSyncScan',$body);
+    }
+
+    /**
+     * 视频异步检测:
+     * @param $url
+     * @param string[] $scenes
+     * @param null $seed
+     * @param null $callback
+     * @param array $audioScenes
+     * @param false $live
+     * @param false $offline
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function videoAsyncScan($url, $scenes = ['porn', 'terrorism'],$seed = null, $callback = null ,$audioScenes = [],$live = false , $offline = false) {
+        $tasks = $this->getTask($url,'video');
+        $body = [
+            'tasks' => $tasks,
+            'scenes' => $scenes,
+            'live'   => $live,
+            'offline' => $offline,
+            'seed'   => $seed,
+            'audioScenes' => $audioScenes,
+            'callback' => $callback,
+        ];
+        return $this->response('videoAsyncScan', $body);
+    }
+
+    /**
+     * 查询视频异步检测结果
+     * @param array $taskId 	要查询的taskId列表。最大长度不超过100。
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function videoAsyncScanResults(array $taskId)
+    {
+        return $this->response('videoAsyncScanResults',$taskId);
+    }
+
+    /**
+     * 停止视频检测
+     * @param array $taskId 要查询的taskId列表。最大长度不超过100。
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function videoCancelScan(array $taskId)
+    {
+        return $this->response('videoCancelScan',$taskId);
+    }
+
+    /**
+     * 视频检测结果反馈
+     * @param string $taskId
+     * @param array $frames
+     * @param string|null $dataId
+     * @param null $url
+     * @param string $suggestion
+     * @param string[] $scenes
+     * @return mixed
+     * @throws ClientException
+     * @throws ServerException
+     */
+    public function videoFeedback(string $taskId,$frames = [],string $dataId = null,$url = null,$suggestion = 'block',$scenes = ['porn','terrorism','ad'])
+    {
+        $body = [
+            'taskId' => $taskId,
+            'dataId' => $dataId,
+            'url' => $url,
+            'suggestion' => $suggestion,
+            'scenes' => $scenes,
+            'frames' => $frames,
+        ];
+        return $this->response('videoFeedback',$body);
     }
 
     /**
