@@ -21,8 +21,8 @@ $config = [
     'accessKeySecret' => '',
     //'regionId' => '',
     //timeout => 6
-    //'connectTimeout' => 6),
-    //debug' => '',
+    //'connectTimeout' => 6,
+    //debug' => false,
 ];
 
 $green = new Green($config);
