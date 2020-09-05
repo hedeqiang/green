@@ -20,8 +20,9 @@ $config = [
     'accessKeyId' => '',
     'accessKeySecret' => '',
     //'regionId' => '',
-    //'connectTimeout' => env('GREEN_CONNECT_TIMEOUT',''),
-    //debug' => env('GREEN_DEBUG',false),
+    //timeout => 6
+    //'connectTimeout' => 6),
+    //debug' => '',
 ];
 
 $green = new Green($config);
