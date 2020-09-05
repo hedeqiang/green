@@ -13,6 +13,7 @@ return [
     'accessKeyId' => env('GREEN_ACCESS_KEY_ID', ''),
     'accessKeySecret' => env('GREEN_ACCESS_KEY_SECRET', ''),
     'regionId' => env('GREEN_REGION_ID', 'cn-beijing'),
-    'connectTimeout' => env('GREEN_CONNECT_TIMEOUT', ''),
+    'timeout' => env('GREEN_TIMEOUT', 6),
+    'connectTimeout' => env('GREEN_CONNECT_TIMEOUT', 6),
     'debug' => env('GREEN_DEBUG', false),
 ];
