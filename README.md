@@ -62,7 +62,7 @@ $green->imageScanFeedback($taskId);
 ## 在 Laravel 中使用
 #### 发布配置文件
 ```php
-php artisan vendor:publish --tag="Hedeqiang\Green\ServiceProvider"
+php artisan vendor:publish --tag=green
 ```
 ##### 编写 .env 文件
 ```
