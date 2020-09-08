@@ -19,7 +19,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->publishes([
             __DIR__.'/Config/green.php' => config_path('green.php'),
-        ],'green');
+        ], 'green');
     }
 
     public function register()
